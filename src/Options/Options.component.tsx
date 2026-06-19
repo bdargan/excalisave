@@ -111,7 +111,6 @@ export const Options: React.FC = () => {
               Configure Sync Settings
             </Button>
           </Box>
-
           <Box px="4" mt="8">
             <Heading as="h3" size={"5"} style={{ paddingBottom: "10px" }}>
               Menu Placement:
