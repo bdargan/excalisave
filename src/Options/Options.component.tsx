@@ -89,6 +89,35 @@ export const Options: React.FC = () => {
               Configure Sync Settings
             </Button>
           </Box>
+
+          <Box px="4" mt="8">
+            <Heading as="h3" size={"5"} style={{ paddingBottom: "10px" }}>
+              Menu Placement:
+            </Heading>
+            <Text size={"2"} as="p" style={{ lineHeight: 1.1 }}>
+              Choose how the Excalisave menu appears when you click the
+              "Excalisave" button next to the diagram title.
+            </Text>
+            <br />
+            <Flex gap="2">
+              <Button
+                variant={menuPlacement === "inline" ? "solid" : "soft"}
+                onClick={() => applyMenuPlacement("inline")}
+              >
+                Inline
+              </Button>
+              <Button
+                variant={menuPlacement === "floating" ? "solid" : "soft"}
+                onClick={() => applyMenuPlacement("floating")}
+              >
+                Floating
+              </Button>
+            </Flex>
+            <Text size="1" color="gray" mt="2" as="p">
+              Inline: opens a positioned popup directly under the button (new
+              behavior). Floating: uses the browser’s native popup.
+            </Text>
+          </Box>
         </Container>
       </Box>
     </Theme>
