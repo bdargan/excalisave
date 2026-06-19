@@ -8,7 +8,7 @@ import {
   Theme,
   Button,
 } from "@radix-ui/themes";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { browser } from "webextension-polyfill-ts";
 import { ImpExp } from "../components/ImpExp/ImpExp.component";
 import SyncSettings from "../components/sync/SyncSettings";
@@ -16,6 +16,28 @@ import "./Options.styles.scss";
 
 export const Options: React.FC = () => {
   const [showSyncSettings, setShowSyncSettings] = useState(false);
+  const [menuPlacement, setMenuPlacement] = useState<"inline" | "floating">(
+    "floating"
+  );
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const res = await browser.storage.local.get(
+          "excalisave_menu_placement"
+        );
+        const v = (res as any)?.excalisave_menu_placement;
+        if (v === "floating" || v === "inline") setMenuPlacement(v);
+      } catch {}
+    })();
+  }, []);
+
+  const applyMenuPlacement = async (v: "inline" | "floating") => {
+    setMenuPlacement(v);
+    try {
+      await browser.storage.local.set({ excalisave_menu_placement: v });
+    } catch {}
+  };
 
   if (showSyncSettings) {
     return <SyncSettings onBack={() => setShowSyncSettings(false)} />;
